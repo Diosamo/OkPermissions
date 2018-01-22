@@ -9,7 +9,7 @@ OkPermissions is installed by adding the following dependency to your `build.gra
 
 ```groovy
 dependencies {
-    implementation ''
+    implementation 'com.okpermission:OkPermission:1.0'
 }
 ```
 
