@@ -3,6 +3,7 @@ package easy.com.easypermissions;
 import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,14 +11,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.okpermission.OkPermissions;
+
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
-import pub.devrel.easypermissions.PermissionRequest;
 
-public class MainActivity extends AppCompatActivity implements EasyPermissionsProxy.OnRequestPermissionsCallbacks {
+import static pub.devrel.easypermissions.AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE;
 
-    private static final String TAG = "dada";
+public class MainActivity extends AppCompatActivity implements OkPermissions.OnRequestPermissionsResultCallbacks {
+
 
     private Button mBt1;
     private FrameLayout fragment;
@@ -31,13 +34,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissionsPr
         mBt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                EasyPermissions.requestPermissions(new PermissionRequest.Builder(MainActivity.this, 1, perms)
-//                        .setRationale("提示")
-//                        .setPositiveButtonText("dada")
-//                        .setNegativeButtonText("papa")
-//                        .setTheme(R.style.my_fancy_style)
-//                        .build());
                 requstPermissions();
 
             }
@@ -52,58 +48,42 @@ public class MainActivity extends AppCompatActivity implements EasyPermissionsPr
 
     }
 
-    private void requstPermissions() {
-        EasyPermissionsProxy.getInstance(MainActivity.this).requestPermissions(1,perms,this);
 
-    }
+
 
     String[] perms = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE};
 
 
-
+    private void requstPermissions() {
+        OkPermissions.requestPerssions(this,perms);
+        //Or array
+        OkPermissions.requestPerssions(this,Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE);
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-//        PermissionsUtils.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
+        OkPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
 
 
     }
 
     @Override
-    public void onAgreeAllPermissions() {
-                Log.d(TAG, "开始工作");
+    public void agreeAllPermissions() {
 
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        for (String perm : perms) {
-            Log.d(TAG, "onPermissionsDenied: 拒绝 "+perm);
-        }
+
     }
 
     @Override
     public void onPermissionsNeverAskDenied(int requestCode, List<String> perms) {
-            for (String perm : perms) {
-            Log.d(TAG, "onPermissionsDenied: 勾选不在询问拒绝 "+perm);
-        }
-    }
 
-//    @Override
-//    public void agreeAllPermissions() {
-//    }
-//
-//    @Override
-//    public void onPermissionsDenied(int requestCode, List<String> perms) {
-//
-//    }
-//
-//    @Override
-//    public void onPermissionsNeverAskDenied(int requestCode, List<String> perms) {
-//
-//    }
+        OkPermissions.startApplicationDetailsSettings(this,DEFAULT_SETTINGS_REQ_CODE);
+
+    }
 
 
 //    @Override
@@ -141,14 +121,19 @@ public class MainActivity extends AppCompatActivity implements EasyPermissionsPr
 //    }
 
 
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
-//            if (!EasyPermissions.hasPermissions(this, perms)) {
-////                Log.d(TAG, "onActivityResult: hasPermissions"+ true);
-//            }
-//        }
-//    }
+    /**
+     * You can open the permissions and check whether the check permissions are open and then execute agreeAllPermissions() directly
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == DEFAULT_SETTINGS_REQ_CODE) {
+            if (EasyPermissions.hasPermissions(this, perms)) {
+                agreeAllPermissions();
+            }
+        }
+    }
 }

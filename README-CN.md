@@ -1,9 +1,9 @@
 # OkPermissions
-OkPermissions is a very simple and lightweight library, which can help you to automatically remove the permission of duplicate application and only apply without permission. It is also easy to use!
+OkPermissions 是一个用起来非常简单而且轻量级的库,它可以帮你自动去除重复申请的权限,只申请没有申请的权限.使用也比较简单方便!
 
-[中文文档](./README-CN.md)  
 
-## Installation
+
+## 依赖
 
 OkPermissions is installed by adding the following dependency to your `build.gradle` file:
 
@@ -14,11 +14,11 @@ dependencies {
 ```
 
 
-## Usage
+## 使用
 
-### Basic
+### 基本操作
 
-To begin using OkPermissions, have your `Activity` (or `Fragment`) override the `onRequestPermissionsResult` method:
+您必须在 `Activity` (or `Fragment`) 重写 `onRequestPermissionsResult` 这个方法,然后加上OkPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this)这行代码:
 
 ```java
 public class MainActivity extends AppCompatActivity {
@@ -33,12 +33,10 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-### Request Permissions
+### 请求权限
 
-The example below shows how to request permissions for a method that requires both
-`CAMERA` and `ACCESS_FINE_LOCATION` permissions. There are a few things to note:
 
- 
+下面就用相机和位置权限的列子给大家示范一下:
 
 ```java
 
@@ -46,14 +44,14 @@ private void methodRequiresTwoPermission() {
     String[] perms = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION};
 	
 	OkPermissions.requestPerssions(this,perms);
-    //Or other
+    //或者直接给予权限
     OkPermissions.requestPerssions(this,Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE);
 }
 ```
 
 
 
-To better control, you must implement the `OnRequestPermissionsResultCallbacks` interface with your `Activities`/`Fragments`.
+你必须在对应请求权限的`Activities`/`Fragments` 实现 `OnRequestPermissionsResultCallbacks`这个接口 .
 
 ```java
 public class MainActivity extends AppCompatActivity implements OkPermissions.OnRequestPermissionsResultCallbacks {
@@ -97,17 +95,17 @@ public class MainActivity extends AppCompatActivity implements OkPermissions.OnR
 }
 ```
 
-### Required Permissions
+### 需要的权限
 
-In some cases your app will not function properly without certain permissions. If the user
-denies these permissions with the "Never Ask Again" option, you will be unable to request
-these permissions from the user and they must be changed in app settings. You can use the
-method `onPermissionsNeverAskDenied` to display a dialog to the
-user in this situation and direct them to the system setting screen for your app:
+在某些情况下，如果没有某些权限，你的应用程序将无法正常运行。如果用户
+通过“永不再问”选项来拒绝这些权限，您将无法请求
+用户的这些权限必须在应用程序设置中进行更改。您可以使用
+方法“onPermissionsNeverAskDenied”来显示一个对话框
+在这种情况下，用户可以直接将他们引导到系统设置屏幕上:
 
 ```java
 /**
- * The denied permission is all checked out (if there are any other permissions that are not checked, the onPermissionsDenied)
+ *
  * @param requestCode
  * @param perms
  */

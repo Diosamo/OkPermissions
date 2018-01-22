@@ -12,7 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.okpermission.OkPermissions;
+
 import java.util.List;
+
+import static pub.devrel.easypermissions.AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE;
 
 /**
  * @author LiHongCheng
@@ -22,7 +26,7 @@ import java.util.List;
  * @mail diosamolee2014@gmail.com
  * @date 2018/1/19 14:08
  */
-public class MyFragment extends Fragment implements PermissionsUtils.OnRequestPermissionsResultCallbacks {
+public class MyFragment extends Fragment implements OkPermissions.OnRequestPermissionsResultCallbacks {
 
 
     private static final String TAG = "dada2";
@@ -45,32 +49,44 @@ public class MyFragment extends Fragment implements PermissionsUtils.OnRequestPe
     }
     String[] perms = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE};
     private void startPermisison() {
-        PermissionsUtils.requestPerssions(this,"里面的权限",perms);
+        OkPermissions.requestPerssions(this,perms);
     }
 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        PermissionsUtils.onRequestPermissionsResult(requestCode,permissions, grantResults,this);
+        OkPermissions.onRequestPermissionsResult(requestCode,permissions, grantResults,this);
     }
 
+
+    /**
+     * All permissions are allowed to start the next step here.
+     */
     @Override
     public void agreeAllPermissions() {
-        Log.d(TAG, "开始工作");
+        // Already have permission, do the thing
+
     }
 
+    /**
+     * Permission denied
+     * @param requestCode
+     * @param perms
+     */
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        for (String perm : perms) {
-            Log.d(TAG, "onPermissionsDenied: 拒绝 "+perm);
-        }
+
     }
 
+    /**
+     * The denied permission is all checked out (if there are any other permissions that are not checked, the onPermissionsDenied)
+     * @param requestCode
+     * @param perms
+     */
     @Override
     public void onPermissionsNeverAskDenied(int requestCode, List<String> perms) {
-        for (String perm : perms) {
-            Log.d(TAG, "onPermissionsDenied: 勾选不在询问拒绝 "+perm);
-        }
+
+        //Use the dialog prompt to use after the user confirms.
     }
 }
