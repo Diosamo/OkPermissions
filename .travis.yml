@@ -25,3 +25,5 @@ script: ./gradlew build
 
 after_failure:
   - cat app/build/reports/tests/testDebugUnitTest/index.html
+
+   before_install:    - chmod +x gradlew
