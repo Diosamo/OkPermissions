@@ -1,4 +1,4 @@
-# OkPermissions
+# OkPermissions 	[![Build Status][1]][2]
 OkPermissions 是一个用起来非常简单而且轻量级的库,它可以帮你自动去除重复申请的权限,只申请没有申请的权限.使用也比较简单方便!
 
 
@@ -152,4 +152,5 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
    limitations under the License.
 
 ```
-
+[1]: https://travis-ci.org/Diosamo/OkPermissions.svg?branch=master
+[2]: https://travis-ci.org/Diosamo/OkPermissions

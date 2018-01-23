@@ -1,4 +1,4 @@
-# OkPermissions
+# OkPermissions    [![Build Status][1]][2]
 OkPermissions is a very simple and lightweight library, which can help you to automatically remove the permission of duplicate application and only apply without permission. It is also easy to use!
 
 [中文文档](./README-CN.md)  
@@ -155,3 +155,7 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 ```
 
+
+
+[1]: https://travis-ci.org/Diosamo/OkPermissions.svg?branch=master
+[2]: https://travis-ci.org/Diosamo/OkPermissions
