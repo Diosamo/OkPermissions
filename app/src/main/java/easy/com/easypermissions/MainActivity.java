@@ -15,9 +15,6 @@ import com.okpermission.OkPermissions;
 
 import java.util.List;
 
-import pub.devrel.easypermissions.EasyPermissions;
-
-import static pub.devrel.easypermissions.AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE;
 
 public class MainActivity extends AppCompatActivity implements OkPermissions.OnRequestPermissionsResultCallbacks {
 
@@ -81,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements OkPermissions.OnR
     @Override
     public void onPermissionsNeverAskDenied(int requestCode, List<String> perms) {
 
-        OkPermissions.startApplicationDetailsSettings(this,DEFAULT_SETTINGS_REQ_CODE);
+//        OkPermissions.startApplicationDetailsSettings(this,DEFAULT_SETTINGS_REQ_CODE);
 
     }
 
@@ -121,19 +118,19 @@ public class MainActivity extends AppCompatActivity implements OkPermissions.OnR
 //    }
 
 
-    /**
-     * You can open the permissions and check whether the check permissions are open and then execute agreeAllPermissions() directly
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == DEFAULT_SETTINGS_REQ_CODE) {
-            if (EasyPermissions.hasPermissions(this, perms)) {
-                agreeAllPermissions();
-            }
-        }
-    }
+//    /**
+//     * You can open the permissions and check whether the check permissions are open and then execute agreeAllPermissions() directly
+//     * @param requestCode
+//     * @param resultCode
+//     * @param data
+//     */
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == DEFAULT_SETTINGS_REQ_CODE) {
+//            if (EasyPermissions.hasPermissions(this, perms)) {
+//                agreeAllPermissions();
+//            }
+//        }
+//    }
 }
