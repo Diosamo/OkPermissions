@@ -46,9 +46,9 @@ The example below shows how to request permissions for a method that requires bo
 private void methodRequiresTwoPermission() {
     String[] perms = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION};
 	
-	OkPermissions.requestPerssions(this,perms);
+	OkPermissions.apply(this,"A first request to be rejected second times",perms);
     //Or other
-    OkPermissions.requestPerssions(this,Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE);
+    OkPermissions.apply(this,"A first request to be rejected second times",Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE);
 }
 ```
 

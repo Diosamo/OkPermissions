@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
 private void methodRequiresTwoPermission() {
     String[] perms = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION};
 	
-	OkPermissions.requestPerssions(this,perms);
+	OkPermissions.apply(this,"如果第一次申请被拒绝第二次弹出的对话框描述",perms);
     //或者直接给予权限
-    OkPermissions.requestPerssions(this,Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE);
+    OkPermissions.apply(this,"如果第一次申请被拒绝第二次弹出的对话框描述",Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE);
 }
 ```
 
