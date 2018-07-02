@@ -6,17 +6,18 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.okpermission.OkPermissions;
+import com.okpermission.PermissionsU;
+import com.okpermission.easypermissions.AppSettingsDialog;
 
 import java.util.List;
 
-import static pub.devrel.easypermissions.AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE;
 
 /**
  * @author LiHongCheng
@@ -26,7 +27,7 @@ import static pub.devrel.easypermissions.AppSettingsDialog.DEFAULT_SETTINGS_REQ_
  * @mail diosamolee2014@gmail.com
  * @date 2018/1/19 14:08
  */
-public class MyFragment extends Fragment implements OkPermissions.OnRequestPermissionsResultCallbacks {
+public class MyFragment extends Fragment implements PermissionsU.OnRequestPermissionsResultCallbacks {
 
 
     private static final String TAG = "dada2";
@@ -49,8 +50,10 @@ public class MyFragment extends Fragment implements OkPermissions.OnRequestPermi
     }
     String[] perms = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE};
     private void startPermisison() {
-        OkPermissions.requestPerssions(this,perms);
+        OkPermissions.apply(this,"如果第一次申请被拒绝第二次弹出的对话框描述",perms);
     }
+
+
 
 
     @Override
@@ -59,16 +62,15 @@ public class MyFragment extends Fragment implements OkPermissions.OnRequestPermi
         OkPermissions.onRequestPermissionsResult(requestCode,permissions, grantResults,this);
     }
 
-
     /**
      * All permissions are allowed to start the next step here.
      */
     @Override
     public void agreeAllPermissions() {
         // Already have permission, do the thing
+        Toast.makeText(mContext, "fragment_权限获取成功", Toast.LENGTH_SHORT).show();
 
     }
-
     /**
      * Permission denied
      * @param requestCode
@@ -76,6 +78,7 @@ public class MyFragment extends Fragment implements OkPermissions.OnRequestPermi
      */
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
+        Toast.makeText(mContext, "fragment_权限获取失败", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -86,7 +89,7 @@ public class MyFragment extends Fragment implements OkPermissions.OnRequestPermi
      */
     @Override
     public void onPermissionsNeverAskDenied(int requestCode, List<String> perms) {
-
+        new AppSettingsDialog.Builder(this).setTitle("提示").setRationale("需要前往设置中心手动打开申请权限").build().show();
         //Use the dialog prompt to use after the user confirms.
     }
 }

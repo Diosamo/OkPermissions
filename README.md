@@ -1,5 +1,6 @@
 # OkPermissions    [![Build Status][1]][2]
-OkPermissions is a very simple and lightweight library, which can help you to automatically remove the permission of duplicate application and only apply without permission. It is also easy to use!
+OkPermissions是一个非常简单和轻量级的库,基于Easypermissions1.2.0，它可以帮助您自动删除重复应用程序的权限，并仅在未经许可的情况下应用。针对Activity,与Fragment中做了处理兼容,它也很容易使用！
+OkPermissions is a very simple and lightweight library, based on Easypermissions1.2.0, which can help you automatically delete the permissions of a repeat application and apply it only without permission. It's also easy to use!
 
 [中文文档](./README-CN.md)  
 
@@ -9,7 +10,7 @@ OkPermissions is installed by adding the following dependency to your `build.gra
 
 ```groovy
 dependencies {
-    implementation 'com.okpermission:OkPermission:1.1.0'
+    api 'com.okpermission:OkPermission:1.3.0'
 }
 ```
 
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements OkPermissions.OnR
      */
     @Override
     public void onPermissionsNeverAskDenied(int requestCode, List<String> perms) {
-
+		new AppSettingsDialog.Builder(this).setTitle("hint").setRationale("setting").build().show();
     }
 }
 ```

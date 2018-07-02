@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">OkPermission</string>
     <string name="rationale_ask">This app may not work correctly without the requested permissions.</string>
     <string name="rationale_ask_again">
         This app may not work correctly without the requested permissions.

@@ -20,9 +20,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url  "https://dl.bintray.com/diosamolee/Permission"
-        }
+
     }
 
     //注释中有汉字，需要这里处理

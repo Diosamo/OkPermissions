@@ -1,5 +1,8 @@
 # OkPermissions 	[![Build Status][1]][2]
-OkPermissions 是一个用起来非常简单而且轻量级的库,它可以帮你自动去除重复申请的权限,只申请没有申请的权限.使用也比较简单方便!
+OkPermissions是一个非常简单和轻量级的库,基于Easypermissions1.2.0，它可以帮助您自动删除重复应用程序的权限，并仅在未经许可的情况下应用。针对Activity,与Fragment中做了处理兼容,它也很容易使用！
+
+
+
 
 
 
@@ -9,7 +12,7 @@ OkPermissions is installed by adding the following dependency to your `build.gra
 
 ```groovy
 dependencies {
-    implementation 'com.okpermission:OkPermission:1.1.0'
+    api 'com.okpermission:OkPermission:1.3.0'
 }
 ```
 
@@ -65,32 +68,27 @@ public class MainActivity extends AppCompatActivity implements OkPermissions.OnR
     }
 
    /**
-     * All permissions are allowed to start the next step here.
+     * 权限申请成功
      */
     @Override
     public void agreeAllPermissions() {
-        // Already have permission, do the thing
-
+        Toast.makeText(this, "权限获取成功", Toast.LENGTH_SHORT).show();
     }
 
     /**
-     * Permission denied
-     * @param requestCode
-     * @param perms
+     * 权限部分失败
      */
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-
+        Toast.makeText(this, "权限获取失败", Toast.LENGTH_SHORT).show();
     }
 
     /**
-     * The denied permission is all checked out (if there are any other permissions that are not checked, the onPermissionsDenied)
-     * @param requestCode
-     * @param perms
+     * 权限部分失败
      */
     @Override
     public void onPermissionsNeverAskDenied(int requestCode, List<String> perms) {
-
+        new AppSettingsDialog.Builder(this).setTitle("提示").setRationale("需要前往设置中心手动打开申请权限").build().show();
     }
 }
 ```
