@@ -39,8 +39,8 @@ publish{
     userOrg = 'diosamolee'//bintray.com的用户名
     groupId = 'com.okpermission'//jcenter上的路径
     artifactId = 'OkPermission'//项目名称
-    publishVersion = '1.3.0'//版本号
-    desc = 'this is PermissionUtils1.3'//描述,不重要
+    publishVersion = '1.4.0'//版本号
+    desc = 'this is PermissionUtils1.4'//描述,不重要
     website = 'https://bintray.com/diosamolee/Permission'//项目主页
 }
 

@@ -1,2 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.okpermission"/>
+    package="com.okpermission">
+
+    <application>
+        <activity
+            android:name=".easypermissions.AppSettingsDialogHolderActivity"
+            android:exported="false"
+            android:label=""
+            android:theme="@style/EasyPermissions.Transparent"/>
+    </application>
+</manifest>
